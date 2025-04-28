@@ -40,18 +40,26 @@ async function register(page, phoneNumber) {
     await page.type('input[name="phone"]', phoneNumber, {delay: 50});
     await page.type('input[name="password"]', password, {delay: 50});
     await page.type('input[name="confirmPassword"]', password, {delay: 50});
-    // Step 3: Click Register
+
+    // Attach the response listener BEFORE clicking the button
+    function handleRegisterResponse(response) {
+        if (
+            response.url() === 'https://api.sofabets.com/api/auth/register' &&
+            response.request().method() === 'POST'
+        ) {
+            response.json().then(body => {
+                console.log(`[REG]`, body.message);
+            });
+            // Remove the listener after the first match to avoid duplicate logs
+            page.off('response', handleRegisterResponse);
+        }
+    }
+    page.on('response', handleRegisterResponse);
+
+    // Click the button and wait
     await page.click('button[type="submit"].LoginRegisterModal_submitButton__tX2uS');
-    // Step 4: Wait for a response (success/failure message)
-    await new Promise(res => setTimeout(res, 1000)); 
-    // let message = await page.evaluate(() => {
-    //     const msg = document.querySelector('.Toastify__toast-body, .LoginRegisterModal_errorMessage__3n8yM');
-    //     return msg ? msg.textContent : null;
-    // });
-    // console.log('[REG]', message);
-    // if (message && message.toLowerCase().includes('success')) {
-    //     await resetPassword(page, phoneNumber);
-    // }
+    await new Promise(res => setTimeout(res, 1000));
+
     await resetPassword(page, phoneNumber);
 
 }
