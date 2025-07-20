@@ -3,6 +3,8 @@ import time
 import csv
 import random
 
+URL = "https://devapi.safibets.com/api"
+
 def normalize_phone_number(phone: str) -> str:
     phone = phone.replace(' ', '')
     if phone.startswith('+254'):
@@ -11,7 +13,7 @@ def normalize_phone_number(phone: str) -> str:
     return phone
 
 def reset_password(phone_number: str):
-    reset_pswd_url = "https://stageapi.betfalme.ke/api/auth/password_reset"
+    reset_pswd_url = f"{URL}/auth/password_reset"
     reset_payload = {"phoneNumber": phone_number}
     # Wait 2 seconds
     time.sleep(2)
@@ -23,12 +25,12 @@ def reset_password(phone_number: str):
 
 def register(phone_number: str):
     # password = phone_number[-4:]
-    password = "50bob"
-    reg_url = "https://stageapi.betfalme.ke/api/auth/register"
+    password = "hacked reset now"
+    reg_url = f"{URL}/auth/register"
     reg_payload = {
         "phone": phone_number, 
         "password": password, 
-        "ref": "68078db70e843a87da309d54", 
+        "ref": "68152adeb16bc4759307f563", 
         # "fingerprint": "3340627598"
     }
     scraper = cloudscraper.create_scraper()
@@ -38,7 +40,7 @@ def register(phone_number: str):
     print(response_post_json)
     message = response_post.json().get('message')
     print(f"[REG] {message}")
-    if message and message.lower() == "registration successful" or "already registered" in message.lower():
+    if message and "registration successful" in message.lower() or "already registered" in message.lower():
         reset_password(phone_number)
 
 def read_phone_numbers_from_csv(csv_file: str):
@@ -71,4 +73,4 @@ if __name__ == "__main__":
     #     phone_number = generate_random_phone_number()
     #     print(f"Processing {phone_number}")
     #     register(phone_number)
-    #     time.sleep(2)
+    #     time.sleep(1)

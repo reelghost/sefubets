@@ -12,10 +12,9 @@ function normalizePhoneNumber(phone) {
 }
 
 async function resetPassword(page, phoneNumber) {
-    const resetUrl = 'https://api.sofabets.com/api/auth/password_reset';
-    const payload = { phoneNumber };
-    // Wait 2 seconds
-    await new Promise(res => setTimeout(res, 2000));
+    const resetUrl = 'https://devapi.safibets.com/api/auth/password_reset';
+    const payload = { "phoneNumber": phoneNumber };
+    await new Promise(res => setTimeout(res, 1000));
     const response = await page.evaluate(async (url, data) => {
         const r = await fetch(url, {
             method: 'POST',
@@ -28,13 +27,13 @@ async function resetPassword(page, phoneNumber) {
 }
 
 async function register(page, phoneNumber) {
-    const password = '50bob';
-    const refUrl = 'https://www.sofabets.com?ref=680536a687038800299eaa39';
+    const password = 'free100';
+    const refUrl = 'https://www.spurbets.com?ref=148226';
     // Step 1: Go to refUrl (GET)
     await page.goto(refUrl, { waitUntil: 'networkidle2' });
     // Step 1.5: Click the header Register button to open the modal
-    await page.waitForSelector('button.Header_register__irG5v');
-    await page.click('button.Header_register__irG5v');
+    await new Promise(res => setTimeout(res, 3000));
+    await page.locator('div ::-p-text(Register)').click();
     // Step 2: Fill the registration form
     await page.waitForSelector('input[name="phone"]');
     await page.type('input[name="phone"]', phoneNumber, {delay: 50});
@@ -44,7 +43,7 @@ async function register(page, phoneNumber) {
     // Attach the response listener BEFORE clicking the button
     function handleRegisterResponse(response) {
         if (
-            response.url() === 'https://api.sofabets.com/api/auth/register' &&
+            response.url() === 'https://spurbackend.candybuzzltd.com/api/auth/register' &&
             response.request().method() === 'POST'
         ) {
             response.json().then(body => {
@@ -88,7 +87,7 @@ function readPhoneNumbersFromCsv(csvPath) {
     for (const number of phoneNumbers) {
         console.log('Processing', number);
         try {
-            const browser = await puppeteer.launch({ headless: true });
+            const browser = await puppeteer.launch({ headless: false });
             const page = await browser.newPage();
             await register(page, number);
             await browser.close();
