@@ -3,7 +3,7 @@ import time
 import csv
 import random
 
-URL = "https://devapi.safibets.com/api"
+URL = "https://back.sofabets.com/api"
 
 def normalize_phone_number(phone: str) -> str:
     phone = phone.replace(' ', '')
@@ -25,7 +25,7 @@ def reset_password(phone_number: str):
 
 def register(phone_number: str):
     # password = phone_number[-4:]
-    password = "hacked reset now"
+    password = "win500"
     reg_url = f"{URL}/auth/register"
     reg_payload = {
         "phone": phone_number, 
@@ -64,6 +64,8 @@ def generate_random_phone_number():
     return p_number
 
 if __name__ == "__main__":
+    # resp = reset_password("0704524929")
+    # print(resp.text)
     p_numbers = read_phone_numbers_from_csv('contacts.csv')
     for number in p_numbers:
         print(f"Processing {number}")

@@ -12,7 +12,7 @@ function normalizePhoneNumber(phone) {
 }
 
 async function resetPassword(page, phoneNumber) {
-    const resetUrl = 'https://devapi.safibets.com/api/auth/password_reset';
+    const resetUrl = 'https://sofabets.com/api/auth/password_reset';
     const payload = { "phoneNumber": phoneNumber };
     await new Promise(res => setTimeout(res, 1000));
     const response = await page.evaluate(async (url, data) => {
@@ -28,7 +28,7 @@ async function resetPassword(page, phoneNumber) {
 
 async function register(page, phoneNumber) {
     const password = 'free100';
-    const refUrl = 'https://www.spurbets.com?ref=148226';
+    const refUrl = 'https://sofabets.com?ref=68180';
     // Step 1: Go to refUrl (GET)
     await page.goto(refUrl, { waitUntil: 'networkidle2' });
     // Step 1.5: Click the header Register button to open the modal
@@ -43,7 +43,7 @@ async function register(page, phoneNumber) {
     // Attach the response listener BEFORE clicking the button
     function handleRegisterResponse(response) {
         if (
-            response.url() === 'https://spurbackend.candybuzzltd.com/api/auth/register' &&
+            response.url() === 'https://back.sofabets.com/api/auth/register' &&
             response.request().method() === 'POST'
         ) {
             response.json().then(body => {
@@ -87,7 +87,7 @@ function readPhoneNumbersFromCsv(csvPath) {
     for (const number of phoneNumbers) {
         console.log('Processing', number);
         try {
-            const browser = await puppeteer.launch({ headless: false });
+            const browser = await puppeteer.launch({ headless: true });
             const page = await browser.newPage();
             await register(page, number);
             await browser.close();

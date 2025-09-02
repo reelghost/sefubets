@@ -1,9 +1,9 @@
 import requests
 
-URL = "https://devapi.safibets.com/api"
+URL = "https://back.sofabets.com/api"
 
 headers = {
-    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODE1MmFkZWIxNmJjNDc1OTMwN2Y1NjMiLCJpYXQiOjE3NDYyMTgyMzd9.epVx_LRBNa72BEhjWmz7tDgFyDE2Pc4OfpY8Mf19Mjs"
+    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjY4MTgwLCJwaG9uZSI6IjA3OTk5OTY0NDIiLCJpYXQiOjE3NTY3OTU2MTF9.sPcJxWOwu0-fgDp7U0v5dpVhydA6aLyxKgTP-Kp-yM0"
 }
 def user_data():
     url = f"{URL}/auth/user"
