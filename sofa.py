@@ -3,7 +3,7 @@ import time
 import csv
 import random
 
-URL = "https://stageapi.betfalme.ke/api"
+URL = "https://back.sofabets.com/api"
 
 def normalize_phone_number(phone: str) -> str:
     phone = phone.replace(' ', '')
