@@ -2,6 +2,7 @@ import cloudscraper
 import time
 import csv
 import random
+import secrets
 
 URL = "https://back.sofabets.com/api"
 
@@ -28,10 +29,11 @@ def register(phone_number: str):
     password = "win500"
     reg_url = f"{URL}/auth/register"
     reg_payload = {
-        "phone": phone_number, 
-        "password": password, 
-        "ref": "68152adeb16bc4759307f563", 
-        "fingerprint": ''.join(random.choices('0123456789', k=random.choice([9,10])))
+        "phone":phone_number,
+        "password":password,
+        "confirmPassword":password,
+        "fingerprint": secrets.token_hex(16),
+        "referrer":"68180"
     }
     scraper = cloudscraper.create_scraper()
     # Step 2: Using the same session, send a POST request to reg_url with the payload
@@ -70,6 +72,7 @@ if __name__ == "__main__":
     for number in p_numbers:
         print(f"Processing {number}")
         register(number)
+        # break
     # a while loop to generate random number and register them
     # while True:
     #     phone_number = generate_random_phone_number()
