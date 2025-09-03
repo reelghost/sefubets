@@ -34,7 +34,6 @@ def register(phone_number: str):
         "ref": "594244", 
         "fingerprint": ''.join(random.choices('0123456789', k=random.choice([9,10])))
     }
-    {"phone":"0720682063","password":"win500","ref":"594244","fingerprint":"2723123727"}
     scraper = cloudscraper.create_scraper()
     # Step 2: Using the same session, send a POST request to reg_url with the payload
     response_post = scraper.post(reg_url, json=reg_payload)
