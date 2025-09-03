@@ -12,7 +12,7 @@ function normalizePhoneNumber(phone) {
 }
 
 async function resetPassword(page, phoneNumber) {
-    const resetUrl = 'https://sofabets.com/api/auth/password_reset';
+    const resetUrl = 'https://back.sofabets.com/api/auth/password_reset';
     const payload = { "phoneNumber": phoneNumber };
     await new Promise(res => setTimeout(res, 1000));
     const response = await page.evaluate(async (url, data) => {
