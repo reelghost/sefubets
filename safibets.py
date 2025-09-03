@@ -2,8 +2,9 @@ import cloudscraper
 import time
 import csv
 import random
+import secrets
 
-URL = "https://stageapi.betfalme.ke/api"
+URL = "https://back.safibets.com/api"
 
 def normalize_phone_number(phone: str) -> str:
     phone = phone.replace(' ', '')
@@ -25,14 +26,14 @@ def reset_password(phone_number: str):
 
 def register(phone_number: str):
     # password = phone_number[-4:]
-    # https://www.betfalme.ke/register?ref=594244
     password = "win500"
     reg_url = f"{URL}/auth/register"
     reg_payload = {
-        "phone": phone_number, 
-        "password": password, 
-        "ref": "594244", 
-        "fingerprint": ''.join(random.choices('0123456789', k=random.choice([9,10])))
+        "phone":phone_number,
+        "password":password,
+        "confirmPassword":password,
+        "fingerprint": secrets.token_hex(16),
+        "referrer":"137708"
     }
     scraper = cloudscraper.create_scraper()
     # Step 2: Using the same session, send a POST request to reg_url with the payload
