@@ -25,14 +25,16 @@ def reset_password(phone_number: str):
 
 def register(phone_number: str):
     # password = phone_number[-4:]
+    # https://www.betfalme.ke/register?ref=594244
     password = "win500"
     reg_url = f"{URL}/auth/register"
     reg_payload = {
         "phone": phone_number, 
         "password": password, 
-        "ref": "68152adeb16bc4759307f563", 
+        "ref": "594244", 
         "fingerprint": ''.join(random.choices('0123456789', k=random.choice([9,10])))
     }
+    {"phone":"0720682063","password":"win500","ref":"594244","fingerprint":"2723123727"}
     scraper = cloudscraper.create_scraper()
     # Step 2: Using the same session, send a POST request to reg_url with the payload
     response_post = scraper.post(reg_url, json=reg_payload)
@@ -70,6 +72,7 @@ if __name__ == "__main__":
     for number in p_numbers:
         print(f"Processing {number}")
         register(number)
+        break
     # a while loop to generate random number and register them
     # while True:
     #     phone_number = generate_random_phone_number()
