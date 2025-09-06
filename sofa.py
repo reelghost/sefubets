@@ -26,7 +26,7 @@ def reset_password(phone_number: str):
 
 def register(phone_number: str):
     # password = phone_number[-4:]
-    password = "win500"
+    password = "get100"
     reg_url = f"{URL}/auth/register"
     reg_payload = {
         "phone":phone_number,
@@ -64,18 +64,14 @@ def generate_random_phone_number():
     suffix = ''.join(str(random.randint(0, 9)) for _ in range(7))
     p_number = "072" + suffix
     return p_number
-
+def main():
+    number = sys.argv[1]
+    register(number)
 if __name__ == "__main__":
-    # resp = reset_password("0704524929")
-    # print(resp.text)
-    p_numbers = read_phone_numbers_from_csv('contacts.csv')
-    for number in p_numbers:
-        print(f"Processing {number}")
-        register(number)
-        # break
-    # a while loop to generate random number and register them
-    # while True:
-    #     phone_number = generate_random_phone_number()
-    #     print(f"Processing {phone_number}")
-    #     register(phone_number)
-    #     time.sleep(1)
+    main()
+# if __name__ == "__main__":
+#     p_numbers = read_phone_numbers_from_csv('contacts.csv')
+#     for number in p_numbers:
+#         print(f"Processing {number}")
+#         register(number)
+  
