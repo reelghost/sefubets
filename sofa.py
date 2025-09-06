@@ -2,6 +2,7 @@ import cloudscraper
 import time
 import csv
 import random
+import sys
 import secrets
 
 URL = "https://back.sofabets.com/api"
@@ -65,7 +66,11 @@ def generate_random_phone_number():
     p_number = "072" + suffix
     return p_number
 def main():
-    number = sys.argv[1]
+    if len(sys.argv) > 1:
+        number = sys.argv[1]
+    else:
+        print("Please provide a phone number as the first argument")
+        sys.exit(1)
     register(number)
 if __name__ == "__main__":
     main()
