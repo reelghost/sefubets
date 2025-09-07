@@ -10,6 +10,11 @@ HEADERS = {
     "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjY4MTgwLCJwaG9uZSI6IjA3OTk5OTY0NDIiLCJpYXQiOjE3NTY4Mjg5NzJ9.xfL4HLN0MHr_7D8IX4vAdKc91hd56LJJSXekZP3mMYA"
 }
 
+def verify_otp(otp: str):
+    resp = cloudscraper.create_scraper().post(f"{URL}/auth/verify", headers=HEADERS, json={"otp": otp})
+    data = resp.json()  
+    return data
+
 def get_balance():
     resp = cloudscraper.create_scraper().get(f"{URL}/auth/user", headers=HEADERS)
     data = resp.json()  
@@ -40,7 +45,7 @@ def reset_password(phone_number: str):
 
 def register(phone_number: str):
     # password = phone_number[-4:]
-    password = "get100"
+    password = "toa100sai"
     reg_url = f"{URL}/auth/register"
     reg_payload = {
         "phone":phone_number,
@@ -76,7 +81,7 @@ def generate_random_phone_number():
     # Generates a random Kenyan phone number starting with '072'
     import random
     suffix = ''.join(str(random.randint(0, 9)) for _ in range(7))
-    p_number = "072" + suffix
+    p_number = "079" + suffix
     return p_number
 # def main():
 #     if len(sys.argv) > 1:
@@ -88,10 +93,16 @@ def generate_random_phone_number():
 # if __name__ == "__main__":
 #     main()
 if __name__ == "__main__":
-    p_numbers = read_phone_numbers_from_csv('contacts.csv')
-    for number in p_numbers:
-        print(f"Processing {number}")
-        register(number)
+    # p_numbers = read_phone_numbers_from_csv('contacts.csv')
+    # for number in p_numbers:
+    #     print(f"Processing {number}")
+    #     register(number)
     #  Get the balance of the user
+     # a while loop to generate random number and register them
+    while True:
+        phone_number = generate_random_phone_number()
+        print(f"Processing {phone_number}")
+        register(phone_number)
+        time.sleep(1)
     get_balance()
   
