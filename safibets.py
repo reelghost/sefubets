@@ -11,7 +11,7 @@ HEADERS = {
 }
 
 def get_number_of_refs():
-    resp = requests.get(f"{URL}/auth/user", headers=HEADERS)
+    resp = cloudscraper.create_scraper().get(f"{URL}/auth/user", headers=HEADERS)
     data = resp.json()
     return data.get('total_referrals')
 
