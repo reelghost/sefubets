@@ -3,8 +3,17 @@ import time
 import csv
 import random
 import secrets
+import sys
 
 URL = "https://back.safibets.com/api"
+HEADERS = {
+    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEzNzcwOCwicGhvbmUiOiIwNzk5OTk2NDQyIiwiaWF0IjoxNzU1MTkxOTI2fQ.-j412Tw3zlGyaiNmqWMClZnfDk9IGa2hNN3ZgyFfuVU"
+}
+
+def get_number_of_refs():
+    resp = requests.get(f"{URL}/auth/user", headers=HEADERS)
+    data = resp.json()
+    return data.get('total_referrals')
 
 def normalize_phone_number(phone: str) -> str:
     phone = phone.replace(' ', '')
@@ -65,14 +74,25 @@ def generate_random_phone_number():
     p_number = "072" + suffix
     return p_number
 
+def main():
+    if len(sys.argv) > 1:
+        number = sys.argv[1]
+    else:
+        print("Please provide a phone number as the first argument")
+        sys.exit(1)
+    register(number)
 if __name__ == "__main__":
-    # resp = reset_password("0704524929")
-    # print(resp.text)
-    p_numbers = read_phone_numbers_from_csv('contacts.csv')
-    for number in p_numbers:
-        print(f"Processing {number}")
-        register(number)
-        # break
+    main()
+
+if __name__ == "__main__":
+    main()
+    # p_numbers = read_phone_numbers_from_csv('contacts.csv')
+    # for number in p_numbers:
+    #     print(f"Processing {number}")
+    #     register(number)
+    #     # break
+    print("Number of referrals: ", get_number_of_refs())
+    
     # a while loop to generate random number and register them
     # while True:
     #     phone_number = generate_random_phone_number()
