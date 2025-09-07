@@ -83,11 +83,11 @@ def main():
     register(number)
 
 if __name__ == "__main__":
-    main()
-    # p_numbers = read_phone_numbers_from_csv('contacts.csv')
-    # for number in p_numbers:
-    #     print(f"Processing {number}")
-    #     register(number)
+    # main()
+    p_numbers = read_phone_numbers_from_csv('contacts.csv')
+    for number in p_numbers:
+        print(f"Processing {number}")
+        register(number)
     print("Number of referrals: ", get_number_of_refs())
     
     # a while loop to generate random number and register them

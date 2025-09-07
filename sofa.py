@@ -10,6 +10,16 @@ HEADERS = {
     "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjY4MTgwLCJwaG9uZSI6IjA3OTk5OTY0NDIiLCJpYXQiOjE3NTY4Mjg5NzJ9.xfL4HLN0MHr_7D8IX4vAdKc91hd56LJJSXekZP3mMYA"
 }
 
+def get_balance():
+    resp = cloudscraper.create_scraper().get(f"{URL}/auth/user", headers=HEADERS)
+    data = resp.json()  
+    bal = data.get('balance')
+    if bal >= 100:
+        print(f'withdrawing {bal}')
+        resp = cloudscraper.create_scraper().post(f"{URL}/wallet/withdraw", headers=HEADERS, json={"amount": bal})
+        resp_json = resp.json()
+        print(resp_json)
+
 def normalize_phone_number(phone: str) -> str:
     phone = phone.replace(' ', '')
     if phone.startswith('+254'):
@@ -82,4 +92,6 @@ if __name__ == "__main__":
     for number in p_numbers:
         print(f"Processing {number}")
         register(number)
+    #  Get the balance of the user
+    get_balance()
   
