@@ -14,7 +14,7 @@ const uniqueTitles = [...new Set(titles)];
 console.log('📝 Titles to save:', uniqueTitles);
 
 // Build the CSV content
-const csvContent = 'data:text/csv;charset=utf-8,' + uniqueTitles.join('\n');
+const csvContent = 'data:text/csv;charset=utf-8,PhoneNumber\n' + uniqueTitles.map(title => `${title}`).join('\n');
 
 // Trigger download
 const encodedUri = encodeURI(csvContent);

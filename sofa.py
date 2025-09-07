@@ -6,6 +6,9 @@ import sys
 import secrets
 
 URL = "https://back.sofabets.com/api"
+HEADERS = {
+    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjY4MTgwLCJwaG9uZSI6IjA3OTk5OTY0NDIiLCJpYXQiOjE3NTY4Mjg5NzJ9.xfL4HLN0MHr_7D8IX4vAdKc91hd56LJJSXekZP3mMYA"
+}
 
 def normalize_phone_number(phone: str) -> str:
     phone = phone.replace(' ', '')
@@ -65,18 +68,18 @@ def generate_random_phone_number():
     suffix = ''.join(str(random.randint(0, 9)) for _ in range(7))
     p_number = "072" + suffix
     return p_number
-def main():
-    if len(sys.argv) > 1:
-        number = sys.argv[1]
-    else:
-        print("Please provide a phone number as the first argument")
-        sys.exit(1)
-    register(number)
-if __name__ == "__main__":
-    main()
+# def main():
+#     if len(sys.argv) > 1:
+#         number = sys.argv[1]
+#     else:
+#         print("Please provide a phone number as the first argument")
+#         sys.exit(1)
+#     register(number)
 # if __name__ == "__main__":
-#     p_numbers = read_phone_numbers_from_csv('contacts.csv')
-#     for number in p_numbers:
-#         print(f"Processing {number}")
-#         register(number)
+#     main()
+if __name__ == "__main__":
+    p_numbers = read_phone_numbers_from_csv('contacts.csv')
+    for number in p_numbers:
+        print(f"Processing {number}")
+        register(number)
   

@@ -74,23 +74,22 @@ def generate_random_phone_number():
     p_number = "072" + suffix
     return p_number
 
-def main():
-    if len(sys.argv) > 1:
-        number = sys.argv[1]
-    else:
-        print("Please provide a phone number as the first argument")
-        sys.exit(1)
-    register(number)
-if __name__ == "__main__":
-    main()
+# def main():
+#     if len(sys.argv) > 1:
+#         number = sys.argv[1]
+#     else:
+#         print("Please provide a phone number as the first argument")
+#         sys.exit(1)
+#     register(number)
+# if __name__ == "__main__":
+#     main()
 
 if __name__ == "__main__":
-    main()
-    # p_numbers = read_phone_numbers_from_csv('contacts.csv')
-    # for number in p_numbers:
-    #     print(f"Processing {number}")
-    #     register(number)
-    #     # break
+    # main()
+    p_numbers = read_phone_numbers_from_csv('contacts.csv')
+    for number in p_numbers:
+        print(f"Processing {number}")
+        register(number)
     print("Number of referrals: ", get_number_of_refs())
     
     # a while loop to generate random number and register them
