@@ -81,8 +81,6 @@ def main():
         print("Please provide a phone number as the first argument")
         sys.exit(1)
     register(number)
-if __name__ == "__main__":
-    main()
 
 if __name__ == "__main__":
     main()
