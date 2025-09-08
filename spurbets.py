@@ -5,9 +5,9 @@ import random
 import sys
 import secrets
 
-URL = "https://back.sofabets.com/api"
+URL = "https://spurbackend.candybuzzltd.com/api"
 HEADERS = {
-    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjY4MTgwLCJwaG9uZSI6IjA3OTk5OTY0NDIiLCJpYXQiOjE3NTY4Mjg5NzJ9.xfL4HLN0MHr_7D8IX4vAdKc91hd56LJJSXekZP3mMYA"
+    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE0ODIyNiwicGhvbmUiOiIwNzk5OTk2NDQyIiwiaWF0IjoxNzU3MzE1ODE4fQ.XazNcAJZ7zVTbj3xTbISscc_qNe9vMTJJlzIDGwqhys"
 }
 
 def verify_otp(otp: str):
@@ -45,14 +45,14 @@ def reset_password(phone_number: str):
 
 def register(phone_number: str):
     # password = phone_number[-4:]
-    password = "sofabets.com"
+    password = "spurbets.com"
     reg_url = f"{URL}/auth/register"
     reg_payload = {
         "phone":phone_number,
         "password":password,
         "confirmPassword":password,
         "fingerprint": secrets.token_hex(16),
-        "referrer":"68180"
+        "referrer":"148226"
     }
     scraper = cloudscraper.create_scraper()
     # Step 2: Using the same session, send a POST request to reg_url with the payload
