@@ -15,7 +15,6 @@ def get_balance():
     bal_url = "https://api.ganjibets.com/api/v1/user/getUserBalance"
     resp = cloudscraper.create_scraper().get(bal_url, headers=HEADERS)
     data = resp.json()
-    print(data)
     bal = data.get('balance')
     if bal >= 100:
         print(withdraw(bal))
@@ -51,7 +50,6 @@ def register(phone_number: str):
     # Step 2: Using the same session, send a POST request to reg_url with the payload
     response_post = scraper.post(reg_url, json=reg_payload)
     response_post_json = response_post.json()
-    print(response_post_json)
     message = response_post.json().get('message')
     print(f"[REG] {message}")
 
@@ -80,5 +78,4 @@ if __name__ == "__main__":
     for number in p_numbers:
         print(f"Processing {number}")
         register(number)
-        get_balance()
   
