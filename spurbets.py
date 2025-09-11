@@ -45,7 +45,7 @@ def reset_password(phone_number: str):
 
 def register(phone_number: str):
     # password = phone_number[-4:]
-    password = "spurbets.com"
+password = "spurbets.com"
     reg_url = f"{URL}/auth/register"
     reg_payload = {
         "phone":phone_number,
