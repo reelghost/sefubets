@@ -4,6 +4,7 @@ import csv
 import random
 import secrets
 import sys
+import sofa
 
 URL = "https://back.safibets.com/api"
 HEADERS = {
@@ -35,7 +36,7 @@ def reset_password(phone_number: str):
 
 def register(phone_number: str):
     # password = phone_number[-4:]
-    password = "safibets.com"
+    password = "love"
     reg_url = f"{URL}/auth/register"
     reg_payload = {
         "phone":phone_number,
@@ -88,6 +89,7 @@ if __name__ == "__main__":
     for number in p_numbers:
         print(f"Processing {number}")
         register(number)
+        sofa.register(number)
     print("Number of referrals: ", get_number_of_refs())
     
     # a while loop to generate random number and register them
